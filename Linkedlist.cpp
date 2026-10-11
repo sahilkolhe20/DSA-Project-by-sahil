@@ -1,286 +1,140 @@
 #include <iostream>
+#include <stack>
+#include <queue>
 #include <string>
-#include <limits>
 using namespace std;
 
-// Node for each bus stop
-struct BusStop {
-    int stopNumber;
+stack<string> stops;
+queue<string> route;
+
+void addStop() {
     string name;
-    BusStop* next;
 
-    BusStop(int number, const string& stopName)
-        : stopNumber(number), name(stopName), next(NULL) {}
-};
+    cout << "Enter bus stop name: ";
+    getline(cin >> ws, name);
 
-class BusStopManager {
-private:
-    BusStop* head;
+    stops.push(name);
+    route.push(name);
 
-public:
-    // Constructor
-    BusStopManager() {
-        head = NULL;
+    cout << "Bus stop added successfully!\n";
+}
+
+void removeStop() {
+    if (stops.empty()) {
+        cout << "No bus stops available!\n";
+        return;
     }
 
-    // Check whether stop number already exists
-    bool stopExists(int number) const {
-        BusStop* current = head;
+    string name = stops.top();
+    stops.pop();
 
-        while (current != NULL) {
-            if (current->stopNumber == number) {
-                return true;
-            }
-            current = current->next;
-        }
+    // Rebuild the queue without the removed stop.
+    queue<string> temp;
 
-        return false;
-    }
+    while (!route.empty()) {
+        string current = route.front();
+        route.pop();
 
-    // Add a bus stop at the end
-    void addStop(int number, const string& name) {
-
-        if (stopExists(number)) {
-            cout << "Error: Stop number already exists.\n";
-            return;
-        }
-
-        BusStop* newStop = new BusStop(number, name);
-
-        if (head == NULL) {
-            head = newStop;
-        }
-        else {
-            BusStop* current = head;
-
-            while (current->next != NULL) {
-                current = current->next;
-            }
-
-            current->next = newStop;
-        }
-
-        cout << "Bus stop added successfully.\n";
-    }
-
-    // Remove a bus stop by stop number
-    void removeStop(int number) {
-
-        if (head == NULL) {
-            cout << "No bus stops available.\n";
-            return;
-        }
-
-        // Remove first node
-        if (head->stopNumber == number) {
-            BusStop* temp = head;
-            head = head->next;
-
-            delete temp;
-
-            cout << "Bus stop removed successfully.\n";
-            return;
-        }
-
-        BusStop* current = head;
-
-        while (current->next != NULL &&
-               current->next->stopNumber != number) {
-            current = current->next;
-        }
-
-        // Stop not found
-        if (current->next == NULL) {
-            cout << "Bus stop not found.\n";
-            return;
-        }
-
-        BusStop* temp = current->next;
-        current->next = temp->next;
-
-        delete temp;
-
-        cout << "Bus stop removed successfully.\n";
-    }
-
-    // Search bus stop by name
-    void searchStop(const string& name) const {
-
-        if (head == NULL) {
-            cout << "No bus stops available.\n";
-            return;
-        }
-
-        BusStop* current = head;
-
-        while (current != NULL) {
-
-            if (current->name == name) {
-                cout << "\nBus stop found!\n";
-                cout << "Stop Number : " << current->stopNumber << endl;
-                cout << "Stop Name   : " << current->name << endl;
-
-                return;
-            }
-
-            current = current->next;
-        }
-
-        cout << "Bus stop not found.\n";
-    }
-
-    // Display all bus stops
-    void displayStops() const {
-
-        if (head == NULL) {
-            cout << "No bus stops available.\n";
-            return;
-        }
-
-        BusStop* current = head;
-
-        cout << "\n===== College Bus Route =====\n";
-
-        while (current != NULL) {
-
-            cout << "Stop " << current->stopNumber
-                 << " -> " << current->name << endl;
-
-            current = current->next;
-        }
-
-        cout << "=============================\n";
-    }
-
-    // Destructor
-    ~BusStopManager() {
-
-        while (head != NULL) {
-
-            BusStop* temp = head;
-            head = head->next;
-
-            delete temp;
+        if (current != name) {
+            temp.push(current);
         }
     }
-};
+
+    route = temp;
+
+    cout << "Removed bus stop: " << name << endl;
+}
+
+void searchStop() {
+    if (route.empty()) {
+        cout << "No bus stops available!\n";
+        return;
+    }
+
+    string name;
+    bool found = false;
+    int position = 1;
+
+    cout << "Enter bus stop to search: ";
+    getline(cin >> ws, name);
+
+    queue<string> temp = route;
+
+    while (!temp.empty()) {
+        if (temp.front() == name) {
+            cout << "Bus stop found at position "
+                 << position << ".\n";
+            found = true;
+            break;
+        }
+
+        temp.pop();
+        position++;
+    }
+
+    if (!found) {
+        cout << "Bus stop not found!\n";
+    }
+}
+
+void displayStops() {
+    if (route.empty()) {
+        cout << "No bus stops available!\n";
+        return;
+    }
+
+    queue<string> temp = route;
+
+    cout << "\nCollege Bus Route:\n";
+
+    int position = 1;
+
+    while (!temp.empty()) {
+        cout << position << ". "
+             << temp.front() << endl;
+
+        temp.pop();
+        position++;
+    }
+}
 
 int main() {
-
-    BusStopManager manager;
-
     int choice;
-    int stopNumber;
-    string stopName;
 
     do {
-
         cout << "\n===== College Bus Stop Manager =====\n";
         cout << "1. Add Bus Stop\n";
-        cout << "2. Remove Bus Stop\n";
+        cout << "2. Remove Last Added Stop\n";
         cout << "3. Search Bus Stop\n";
-        cout << "4. Display Route\n";
+        cout << "4. Display Bus Stops\n";
         cout << "5. Exit\n";
-        cout << "Enter your choice: ";
 
+        cout << "Enter your choice: ";
         cin >> choice;
 
-        // Invalid menu input
-        if (cin.fail()) {
-
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            cout << "Invalid input. Please enter a number.\n";
-            continue;
-        }
-
         switch (choice) {
-
-            // Add bus stop
             case 1:
-
-                cout << "Enter stop number: ";
-                cin >> stopNumber;
-
-                if (cin.fail()) {
-
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                    cout << "Invalid stop number.\n";
-                    break;
-                }
-
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                cout << "Enter stop name: ";
-                getline(cin, stopName);
-
-                if (stopName.empty()) {
-
-                    cout << "Stop name cannot be empty.\n";
-                    break;
-                }
-
-                manager.addStop(stopNumber, stopName);
-
+                addStop();
                 break;
 
-            // Remove bus stop
             case 2:
-
-                cout << "Enter stop number to remove: ";
-                cin >> stopNumber;
-
-                if (cin.fail()) {
-
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                    cout << "Invalid stop number.\n";
-                    break;
-                }
-
-                manager.removeStop(stopNumber);
-
+                removeStop();
                 break;
 
-            // Search bus stop
             case 3:
-
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                cout << "Enter stop name to search: ";
-                getline(cin, stopName);
-
-                if (stopName.empty()) {
-
-                    cout << "Stop name cannot be empty.\n";
-                    break;
-                }
-
-                manager.searchStop(stopName);
-
+                searchStop();
                 break;
 
-            // Display route
             case 4:
-
-                manager.displayStops();
-
+                displayStops();
                 break;
 
-            // Exit
             case 5:
-
-                cout << "Thank you for using College Bus Stop Manager!\n";
-
+                cout << "Exiting the program.\n";
                 break;
 
             default:
-
-                cout << "Invalid choice. Please select 1 to 5.\n";
+                cout << "Invalid choice! Try again.\n";
         }
 
     } while (choice != 5);
