@@ -1,0 +1,20 @@
+Algorithm
+
+Step 1: Start the program.
+Step 2: Initialize an empty stack and an empty queue.
+Step 3: Display the menu with the following options:
+Add a bus stop.
+Remove the last added bus stop.
+Search for a bus stop.
+Display all bus stops.
+Exit.
+Step 4: Read the user's choice.
+Step 5: Perform the selected operation.
+Add Stop: Insert the new stop into the stack and queue.
+Remove Stop: Remove the most recently added stop from the stack and update the queue.
+Search Stop: Search for the specified stop in the route.
+Display Stops: Display all stops in their original route order.
+Exit: Terminate the program.
+Step 6: If the user enters an invalid choice, display an error message.
+Step 7: Repeat Steps 3–6 until the user chooses Exit.
+Step 8: Stop the program.
