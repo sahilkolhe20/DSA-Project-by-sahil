@@ -1,0 +1,9 @@
+Objectives-
+
+The main objectives of the project are:
+1. To develop a College Bus Stop Manager using C++.
+2. To implement a stack for adding and removing bus stops.
+3. To implement a queue for maintaining bus stops in route order.
+4. To allow users to search for a particular bus stop.
+5. To display all bus stops in the correct order.
+6. To understand the practical applications of stack and queue data structures.
