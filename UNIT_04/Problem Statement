@@ -1,0 +1,4 @@
+Problem statement 
+
+BST Height Analysis: Write a C++ program to construct BSTs using ascending, descending, and 
+randomly ordered sequences containing the same elements and compare their heights.
