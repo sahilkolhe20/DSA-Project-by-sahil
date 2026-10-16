@@ -1,0 +1,14 @@
+Algorithm
+
+1. Start.
+2. Read the number of elements, n.
+3. Generate an ascending sequence containing elements from 1 to n.
+4. Create a descending sequence by reversing the ascending sequence.
+5. Generate a random sequence by shuffling the same elements.
+6. Construct three separate BSTs by inserting the elements from each sequence.
+7. Calculate each BST's height recursively: return -1 for an empty tree; otherwise return 1 + max(left subtree
+height, right subtree height).
+8. Display the sequences and their corresponding BST heights.
+9. Compare the heights and display the results.
+10. Release the allocated memory.
+11. Stop.
