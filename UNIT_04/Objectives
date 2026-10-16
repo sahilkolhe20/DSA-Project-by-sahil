@@ -1,0 +1,8 @@
+Objectives
+
+1. Understand the structure and properties of a Binary Search Tree.
+2. Construct BSTs using ascending, descending, and random sequences.
+3. Calculate the height of each BST using recursion.
+4. Compare the heights of the three BSTs.
+5. Analyze how insertion order affects tree structure and performance.
+6. Understand the time complexity of BST operations
