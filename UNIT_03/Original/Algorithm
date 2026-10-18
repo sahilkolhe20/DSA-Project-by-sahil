@@ -1,0 +1,11 @@
+Algorithm--
+
+1. Start the program and initialize head = nullptr.
+2. Display the menu and read the user's choice.
+3. If choice = 1, read stop number/name, create a node, and add it at the end.
+4. If choice = 2, find the stop number, adjust links, and delete the node.
+5. If choice = 3, traverse the list and compare the stop name.
+6. If choice = 4, traverse and display all stops in route order.
+7. If choice = 5, terminate the program.
+8. For any other choice, display an invalid-choice message.
+9. Repeat the menu until Exit is selected.
