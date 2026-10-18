@@ -1,0 +1,152 @@
+Code--
+
+  #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int x) {
+        data = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+Node* insert(Node* root, int x) {
+    if (root == NULL)
+        return new Node(x);
+
+    if (x < root->data)
+        root->left = insert(root->left, x);
+    else if (x > root->data)
+        root->right = insert(root->right, x);
+
+    return root;
+}
+
+int height(Node* root) {
+    if (root == NULL)
+        return 0;
+
+    int lh = height(root->left);
+    int rh = height(root->right);
+
+    return 1 + (lh > rh ? lh : rh);
+}
+
+int search(Node* root, int key) {
+    int count = 0;
+
+    while (root != NULL) {
+        count++;
+
+        if (root->data == key)
+            return count;
+
+        if (key < root->data)
+            root = root->left;
+        else
+            root = root->right;
+    }
+
+    return count;
+}
+
+void deleteTree(Node* root) {
+    if (root == NULL)
+        return;
+
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
+}
+
+void analyze(vector<int> a, const char* order, int n) {
+    Node* root = NULL;
+    int i;
+
+    for (i = 0; i < n; i++)
+        root = insert(root, a[i]);
+
+    long long total = 0;
+
+    for (i = 0; i < n; i++)
+        total += search(root, a[i]);
+
+    double avg = (double)total / n;
+    int unsuccessful = search(root, n + 1);
+
+    cout << left << setw(8) << n
+         << setw(15) << order
+         << setw(10) << height(root)
+         << setw(18) << fixed << setprecision(2) << avg
+         << setw(15) << unsuccessful << endl;
+
+    deleteTree(root);
+}
+
+int main() {
+    int sizes, n, i, j, temp;
+
+    srand((unsigned int)time(NULL));
+
+    cout << "Enter number of input sizes: ";
+    cin >> sizes;
+
+    if (sizes <= 0) {
+        cout << "Invalid input!";
+        return 0;
+    }
+
+    cout << "\nBST HEIGHT AND SEARCH ANALYSIS\n\n";
+
+    cout << left << setw(8) << "Size"
+         << setw(15) << "Order"
+         << setw(10) << "Height"
+         << setw(18) << "Avg Success"
+         << setw(15) << "Unsuccess" << endl;
+
+    cout << "--------------------------------------------------------------\n";
+
+    for (i = 0; i < sizes; i++) {
+        cout << "\nEnter input size: ";
+        cin >> n;
+
+        if (n <= 0) {
+            cout << "Invalid size!\n";
+            continue;
+        }
+
+        vector<int> a(n);
+
+        for (j = 0; j < n; j++)
+            a[j] = j + 1;
+
+        vector<int> b = a;
+        vector<int> c = a;
+
+        // Descending order
+        reverse(b.begin(), b.end());
+
+        // Random order
+        for (j = n - 1; j > 0; j--) {
+            int k = rand() % (j + 1);
+            temp = c[j];
+            c[j] = c[k];
+            c[k] = temp;
+        }
+
+        analyze(a, "Ascending", n);
+        analyze(b, "Descending", n);
+        analyze(c, "Random", n);
+    }
+
+    return 0;
+}
