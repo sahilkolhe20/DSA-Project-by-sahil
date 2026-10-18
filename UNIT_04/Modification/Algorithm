@@ -1,0 +1,11 @@
+Algorithm--
+
+Start.
+Accept different input sizes.
+Generate ascending, descending, and random sequences containing the same elements.
+Construct three BSTs.
+Calculate the height of each BST.
+Count successful and unsuccessful search comparisons.
+Display the results in a table.
+Repeat for all input sizes.
+Stop.
