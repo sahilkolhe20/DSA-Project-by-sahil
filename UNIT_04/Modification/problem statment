@@ -1,0 +1,5 @@
+Problem statment--
+
+To construct BSTs using ascending, descending, and random insertion orders containing the same elements.
+Compare their heights, count successful and unsuccessful search comparisons, and repeat the experiment for
+different input size
