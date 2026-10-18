@@ -1,0 +1,9 @@
+Objective--
+
+To design and implement a College Bus Stop Manager using a singly linked list in C++.
+To dynamically add new bus stops to the route.
+To remove an existing bus stop using its stop number.
+To search for a bus stop by its name.
+To display all bus stops in their correct route order.
+To understand dynamic memory allocation and pointer manipulation,
+To implement a simple menu-driven bus stop management system.
