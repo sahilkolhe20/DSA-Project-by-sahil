@@ -1,0 +1,23 @@
+Flowchart--
+
+       START
+         |
+    Input Sizes
+         |
+   Generate Elements
+         |
+  Create Three Orders
+         |
+    Construct BSTs
+         |
+  Calculate Tree Height
+         |
+ Count Search Comparisons
+         |
+   Display Result Table
+         |
+   More Input Sizes?
+      /       \
+    Yes        No
+     |          |
+   Repeat      STOP
