@@ -1,0 +1,8 @@
+Objectives
+
+• Represent a courier hub and service areas as vertices in a graph.
+• Represent roads and their distances as weighted edges.
+• Implement Dijkstra’s shortest-path algorithm using C++.
+• Calculate the shortest delivery distance from the hub to every reachable service area.
+• Identify and display service areas that cannot be reached from the hub.
+• Demonstrate a practical use of gralgorithms in courier and delivery management.
