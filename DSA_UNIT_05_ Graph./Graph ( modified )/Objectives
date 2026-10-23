@@ -1,0 +1,8 @@
+Objectives
+
+• Represent the courier hub and service areas using a weighted graph.
+• Implement Dijkstra’s algorithm in C++.
+• Allow selection of any source vertex and recalculate shortest distances.
+• Display the complete shortest path from a source to a destination.
+• Update an existing road weight and recalculate shortest paths.
+• Identify service areas unreachable from the selected source.
