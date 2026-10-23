@@ -1,0 +1,13 @@
+Algorithm
+
+1. Start the program.
+2. Create a weighted graph representing the courier hub and service areas.
+3. Set the source hub distance to zero and all other distances to infinity.
+4. Select the unprocessed vertex with the smallest known distance.
+5. Examine all adjacent vertices of the selected vertex.
+6. Add the current distance and road weight to calculate a candidate distance.
+7. If the candidate distance is smaller, update the recorded distance.
+8. Repeat until all reachable vertices have been processed.
+9. Display the shortest distance to every reachable service area.
+10. Display areas whose distances remain infinite as unreachable.
+11. Stop the program.
