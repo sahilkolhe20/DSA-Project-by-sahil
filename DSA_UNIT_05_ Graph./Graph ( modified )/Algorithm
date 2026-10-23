@@ -1,0 +1,11 @@
+Algorithm
+1. Create a weighted graph of the courier hub and service areas.
+2. For shortest distances, ask the user for a source vertex; set its distance to zero and all others to infinity.
+3. Run Dijkstra’s algorithm using a min-priority queue. Relax each edge when a shorter route is found.
+4. For a complete path, store each vertex’s parent when its distance improves; trace parents from destination to
+source and reverse the sequence.
+5. For an edge update, validate the endpoints and new non-negative weight, then update both directions of the
+bidirectional road.
+6. Run Dijkstra’s algorithm again after the update and display the recalculated distances.
+7. Report vertices whose distances remain infinite as unreachable.
+Note: Dijkstra’s algorithm requires non-negative road distances.
