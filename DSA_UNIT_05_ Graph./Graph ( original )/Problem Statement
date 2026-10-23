@@ -1,0 +1,4 @@
+Problem Statement 
+
+:Implement a C++ program to represent a courier hub and service areas as vertices, with road distances as weighted edges. 
+Apply Dijkstra's algorithm from the hub, display the shortest delivery distance to each reachable area, and report areas that cannot be reached
